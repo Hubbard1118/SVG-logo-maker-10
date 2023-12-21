@@ -1,5 +1,4 @@
 const inquirer = require("inquirer");
-const { Circle, Triangle, Square } = require("./shapes");
 const { writeFile } = require("fs/promises");
 
 class CLI {
@@ -82,6 +81,33 @@ class SVG {
   
     setShape(shape) {
       this.shapeElement = shape.render();
+    }
+  }
+  
+  class Shape {
+    constructor() {
+      this.color = "";
+    }
+    setColor(color) {
+      this.color = color;
+    }
+  }
+  
+  class Circle extends Shape {
+    render() {
+      return `<circle cx="120" cy="100" r="80" fill="${this.color}" />`;
+    }
+  }
+  
+  class Triangle extends Shape {
+    render() {
+      return `<polygon points="100, 19 250, 180 50, 180" fill="${this.color}" />`;
+    }
+  }
+  
+  class Square extends Shape {
+    render() {
+      return `<rect x="90" y="40" width="120" height="120" fill="${this.color}" />`;
     }
   }
   
