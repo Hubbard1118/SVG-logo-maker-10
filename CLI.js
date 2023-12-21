@@ -20,7 +20,7 @@ class CLI {
               message: "Enter a logo color",
             },
             {
-              name: "shape",
+              name: "logoShape",
               type: "list",
               message: "Select a shape",
               choices: ["circle", "square", "triangle"],
@@ -31,26 +31,26 @@ class CLI {
               message: "Enter a color for the shape",
             },
           ])
-          .then(({ logo, logoColor, shape, shapeColor }) => {
-            let shape;
-            switch (shape) {
+          .then(({ logo, logoColor, logoShape, shapeColor }) => {
+            let logoShape;
+            switch (logoShape) {
               case "circle":
-                shape = new Circle();
+                logoShape = new Circle();
                 break;
     
               case "square":
-                shape = new Square();
+                logoShape = new Square();
                 break;
     
               default:
-                shape = new Triangle();
+                logoShape = new Triangle();
                 break;
             }
-            shape.setColor(shapeColor);
+            logoShape.setColor(shapeColor);
     
             const svg = new SVG();
             svg.setText(logo, logoColor);
-            svg.setShape(shape);
+            svg.setShape(logoShape);
             return writeFile("logo.svg", svg.render());
           })
           .then(() => {
