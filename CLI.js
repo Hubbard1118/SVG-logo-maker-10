@@ -62,3 +62,27 @@ class CLI {
           });
       }
 }
+
+class SVG {
+    constructor() {
+      this.logoElement = "";
+      this.shapeElement = "";
+    }
+  
+    render() {
+      return `<svg version="1.1" width="350" height="250" xmlns="http://www.w3.org/2000/svg">${this.shapeElement}${this.logoElement}</svg>`;
+    }
+  
+    setText(message, color) {
+      if (message.length > 3) {
+        throw new Error("please only 3 characters!");
+      }
+      this.logoElement = `<text x="125" y="125" font-size="50" text-anchor="middle" fill="${color}">${message}</text>`;
+    }
+  
+    setShape(shape) {
+      this.shapeElement = shape.render();
+    }
+  }
+  
+  
