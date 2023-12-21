@@ -7,34 +7,34 @@ class CLI {
         return inquirer
           .prompt([
             {
-              name: "text",
+              name: "logo",
               type: "input",
               message:
                 "Enter text for the logo:",
               validate: (text) =>
                 text.length <= 3 ||
-                "The message must not contain more than 3 characters",
+                "please enter only 3 characters",
             },
             {
-              name: "textColor",
+              name: "logoColor",
               type: "input",
-              message: "Enter a text color",
+              message: "Enter a logo color",
             },
             {
-              name: "shapeType",
+              name: "shape",
               type: "list",
-              message: "Select a shape for the logo",
+              message: "Select a shape",
               choices: ["circle", "square", "triangle"],
             },
             {
               name: "shapeColor",
               type: "input",
-              message: "Enter a shape color",
+              message: "Enter a color for the shape",
             },
           ])
-          .then(({ text, textColor, shapeType, shapeColor }) => {
+          .then(({ logo, logoColor, shape, shapeColor }) => {
             let shape;
-            switch (shapeType) {
+            switch (shape) {
               case "circle":
                 shape = new Circle();
                 break;
@@ -50,16 +50,15 @@ class CLI {
             shape.setColor(shapeColor);
     
             const svg = new SVG();
-            svg.setText(text, textColor);
+            svg.setText(logo, logoColor);
             svg.setShape(shape);
             return writeFile("logo.svg", svg.render());
           })
           .then(() => {
-            console.log("Generated logo.svg");
+            console.log("Logo complete!");
           })
           .catch((error) => {
             console.log(error);
-            console.log("Oops! Something went wrong.");
           });
       }
 }
